@@ -18,8 +18,14 @@ class TeamsController < ApplicationController
   def edit; end
 
   def create
+<<<<<<< HEAD
     @team = Team.new(team_params)
     @team.owner = current_user
+=======
+    @team = current_user.teams.build(team_params)
+    @team.owner_id = current_user.id
+
+>>>>>>> master
     if @team.save
       @team.invite_member(@team.owner)
       redirect_to @team, notice: I18n.t('views.messages.create_team')
