@@ -15,7 +15,11 @@ class TeamsController < ApplicationController
     @team = Team.new
   end
 
-  def edit; end
+  def edit
+    if @team.owner != current_user
+      redirect_to @team
+    end
+  end
 
   def create
     @team = current_user.teams.build(team_params)
